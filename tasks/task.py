@@ -14,8 +14,12 @@ CONST_ABSOLUTE = 1e-07
 
 
 # Находим контрольное значение
-def control():
-    return math.pow(3, 1)
+def control_x(x=1):
+    return math.pow(3, x)
+
+
+def control_y(x=-0.8):
+    return 5 - 2 * x / (6 - 5 * x + math.pow(x, 2))
 
 
 def summ_1():
@@ -56,9 +60,9 @@ def compare(x, y):
 
 
 if __name__ == '__main__':
-    th1 = Thread(target=compare(summ_1(), control()))
+    th1 = Thread(target=compare(summ_1(), control_x()))
     th1.start()
-    th2 = Thread(target=compare(summ_2(), control()))
+    th2 = Thread(target=compare(summ_2(), control_y()))
     th2.start()
     th1.join()
     th2.join()
